@@ -11,10 +11,10 @@ function logError(err) {
 }
 
 function getConnection() {
-  var port = process.env.REDIS_PORT || 6379,
-      host = process.env.REDIS_HOST || '127.0.0.1',
-      password = process.env.REDIS_PASS,
-      dbNumber = process.env.REDIS_DB;
+  var port = process.env.OPENSHIFT_REDIS_PORT || process.env.REDIS_PORT || 6379,
+      host = process.env.OPENSHIFT_REDIS_HOST || process.env.REDIS_HOST || '127.0.0.1',
+      password = process.env.REDIS_PASSWORD   || process.env.REDIS_PASS,
+      dbNumber = process.env.REDIS_DB         || 0;
   var db = redis.createClient(port, host);
   db.on('error', logError);
 
