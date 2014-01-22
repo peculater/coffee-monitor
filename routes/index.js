@@ -192,9 +192,9 @@ exports.brewUpdate = function(req, res) {
   }
 
   res.set('Content-Type', 'text/plain');
-  res.send(200, "Got this far?");
+  res.send(200, req.data);
   //Validate JSON
-  var update = JSON.parse(req.data);
+  //var update = JSON.parse(req.data);
   
   
   
