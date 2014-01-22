@@ -182,7 +182,7 @@ exports.brewAddSubmit = function(req, res) {
 };
 
 exports.brewUpdate = function(req, res) {
-  req.assert('brewInfo').notEmpty();
+  //req.assert('brewInfo').notEmpty();
   
   var errors = req.validationErrors();
   if(errors) {
@@ -191,8 +191,12 @@ exports.brewUpdate = function(req, res) {
     return;
   }
 
-  
+  res.set('Content-Type', 'text/plain');
+  res.send(200, "Got this far?");
   //Validate JSON
+  var update = JSON.parse(req.update);
+  
+  
   
   //Pull data out of JSON
   
@@ -200,7 +204,7 @@ exports.brewUpdate = function(req, res) {
   
 
 //If this represents a new pot  
-  var brew = {
+  /*var brew = {
     makerId: maker,
     potId: parseInt(potParts[0], 10),
     creationIp: req.ip,
@@ -215,6 +219,7 @@ exports.brewUpdate = function(req, res) {
     //res.redirect('/brews/' + brew.id);
     res.redirect('/');
   });
+  */
 };
 
 exports.brews = fourohfour;

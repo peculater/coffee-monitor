@@ -109,10 +109,11 @@ app.get('/pots', onlineTracker, routes.pots);
 app.get('/brews/add', ensureAuthenticatedOrKnownIp, routes.brewAdd);
 app.post('/brews/add', ensureAuthenticatedOrKnownIp, routes.brewAddSubmit);
 app.get('/brews/add/simple', ensureAuthenticatedOrKnownIp, routes.brewAddSimple);
+app.post('/brews/update', ensureAuthenticatedOrKnownIp, routes.brewUpdate);
 app.get('/brews/:id', onlineTracker, routes.brewDetail);
 app.delete('/brews/:id', userHelper.ensureAuthenticated, routes.brewDelete);
 app.get('/brews', onlineTracker, routes.brews);
-app.post('/brews/update', ensureAuthenticatedOrKnownIp, routes.brewUpdate);
+
 
 app.get('/tea', onlineTracker, routes.teapot);
 app.get('/qr', onlineTracker, routes.qr);
