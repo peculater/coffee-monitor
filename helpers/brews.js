@@ -116,7 +116,7 @@ BrewManager.prototype.updatePot = function(update, next){
               .hmset('pot:' + update.pot, 
                 'lastBrew', update.lastBrew
               )
-            .exec(next);
+              .exec(next);
           }
       }
  ], function(err, results) {

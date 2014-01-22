@@ -1,0 +1,10 @@
+- var klass = 'pot-' + .color;
+.brew(id='pot-#{pot.id}', class=klass,
+    data-currentLevel=pot.currentLevel, data-ready=pot.readyAt)
+  ul
+    li Pot: #{pot.name}
+    - var ready = parseInt(brew.readyAt);
+    li Fraction full: #{pot.currentLevel} 
+    li Ready: #{moment(ready).calendar()} (
+      span.ready-relative #{moment(ready).fromNow()}
+      | )
