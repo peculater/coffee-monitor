@@ -5,8 +5,8 @@ exports.recentBrews = function(req, res) {
   req.manager.getRecentBrews(function(error, brews){
     req.manager.getPots(function(error, pots){
       res.render('recent-brews', { 'title': 'Recent Brews', 'brews': brews, 'pots': pots });
-     }
-  }   
+    });
+  }); 
 } 
 
 function fourohfour(req, res) {

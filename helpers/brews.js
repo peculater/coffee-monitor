@@ -17,6 +17,7 @@ BrewManager.prototype.getRecentBrews = function(next) {
   });
 };
 
+
 function storePartTwo(err, db, obj, type, next) {
   // coerce any non-string keys to strings
   Object.keys(obj).forEach(function(key) { obj[key] = "" + obj[key]; });
