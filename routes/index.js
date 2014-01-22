@@ -191,10 +191,10 @@ exports.brewUpdate = function(req, res) {
     return;
   }
 
-  console.log("Got data: " + req.data);
+  console.log("Got data: " + req.body);
   
   //Validate JSON
-  var update = req.data;
+  var update = req.body;
   
   //Pull data out of JSON
   
