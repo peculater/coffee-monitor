@@ -1,9 +1,16 @@
 {
-  "name": "coffee-monitor",
-  "description": "Monitor when coffee pots were brewed",
-  "version": "0.1.8",
-  "author": "Dan McGee <dpmcgee@gmail.com>",
-  "private": true,
+  "name": "OpenShift-Backstop-Coffee-monitor",
+  "version": "1.0.0",
+  "description": "Monitor when coffee gets brewed on openshift",
+  "keywords": [
+    "OpenShift",
+    "Node.js",
+    "application",
+    "openshift"
+  ],
+  "author": {
+    "name": "Backstop"
+  },
   "bugs": {
     "web": "https://github.com/toofishes/coffee-monitor/issues"
   },
@@ -20,15 +27,18 @@
     }
   ],
   "homepage": "https://github.com/toofishes/coffee-monitor",
-  "scripts": {
-    "start": "node app.js"
+  "repository": {
+    "type": "git",
+    "url": "https://gitub.com/openshift/origin-server"
   },
-  "keywords": [
-    "coffee"
-  ],
+
+  "engines": {
+    "node": ">= 0.6.0",
+    "npm": ">= 1.0.0"
+  },
   "dependencies": {
     "async": "0.2.x",
-    "bcrypt": "0.7.x",
+    "bcrypt": "0.5.x",
     "campfire": "0.1.x",
     "connect-redis": "1.4.x",
     "express": "3.1.x",
@@ -47,8 +57,6 @@
     "jitsu": "*",
     "jshint": "*"
   },
-  "engines": {
-    "node": ">=0.8"
-  },
-  "subdomain": "coffee-monitor"
+  "private": true,
+  "main": "server.js"
 }
