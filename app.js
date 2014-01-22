@@ -102,6 +102,7 @@ app.get('/makers', onlineTracker, routes.makers);
 
 app.get('/pots/add', userHelper.ensureAuthenticated, routes.potAdd);
 app.post('/pots/add', userHelper.ensureAuthenticated, routes.potAddSubmit);
+app.post('/pots/update', ensureAuthenticatedOrKnownIp, routes.potUpdate);
 app.get('/pots/:id', onlineTracker, routes.potDetail);
 app.delete('/pots/:id', userHelper.ensureAuthenticated, routes.potDelete);
 app.get('/pots', onlineTracker, routes.pots);
@@ -109,7 +110,6 @@ app.get('/pots', onlineTracker, routes.pots);
 app.get('/brews/add', ensureAuthenticatedOrKnownIp, routes.brewAdd);
 app.post('/brews/add', ensureAuthenticatedOrKnownIp, routes.brewAddSubmit);
 app.get('/brews/add/simple', ensureAuthenticatedOrKnownIp, routes.brewAddSimple);
-app.post('/brews/update', ensureAuthenticatedOrKnownIp, routes.brewUpdate);
 app.get('/brews/:id', onlineTracker, routes.brewDetail);
 app.delete('/brews/:id', userHelper.ensureAuthenticated, routes.brewDelete);
 app.get('/brews', onlineTracker, routes.brews);

@@ -101,6 +101,10 @@ BrewManager.prototype.deletePot = function(id, next) {
     .exec(next);
 };
 
+BrewManager.prototype.updatePot = function(update, next){
+
+}
+
 BrewManager.prototype.getBrew = function(id, next) {
   this.db.hgetall('brew:' + id, next);
 };
