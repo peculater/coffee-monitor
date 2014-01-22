@@ -1,13 +1,18 @@
 
+var route_dir = "./"
+if (process.env.OPENSHIFT_NODEJS_IP) {
+   route_dir = "coffee-monitor/"   
+}
+
 var express = require('express'),
-    routes = require('./coffee-monitor/routes'),
+    routes = require(route_dir + 'routes'),
     http = require('http'),
     passport = require('passport'),
     path = require('path'),
-    brewHelper = require('./coffee-monitor/helpers/brews'),
-    redisHelper = require('./coffee-monitor/helpers/redis'),
-    signals = require('./coffee-monitor/helpers/signals'),
-    userHelper = require('./coffee-monitor/helpers/users');
+    brewHelper = require(route_dir + 'helpers/brews'),
+    redisHelper = require(route_dir + 'helpers/redis'),
+    signals = require(route_dir + 'helpers/signals'),
+    userHelper = require(route_dir + 'helpers/users');
 
 var db = redisHelper.getConnection();
 var manager = new brewHelper.BrewManager(db);
@@ -56,10 +61,10 @@ app.locals.moment = require('moment');
 app.configure(function() {
   app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000);
   app.set('ip', process.env.OPENSHIFT_NODEJS_IP || process.env.IP || '127.0.0.1');
-  app.set('views', process.env.OPENSHIFT_REPO_DIR + "coffee-monitor/" + 'views/');
+  app.set('views', route_dir + 'views/');
   app.set('view engine', 'jade');
   app.set('trust proxy', true);
-  app.use(express.favicon(process.env.OPENSHIFT_REPO_DIR + "coffee-monitor/" + 'public/favicon.ico',
+  app.use(express.favicon(route_dir + 'public/favicon.ico',
           { maxAge: 365 * 24 * 60 * 60 * 1000 }));
   app.use(express.logger('dev'));
   app.use(express.compress({ filter: compressFilter }));
@@ -76,8 +81,8 @@ app.configure(function() {
   app.use(attachBrewManager);
   app.use(attachPassport);
   app.use(app.router);
-  app.use(require('stylus').middleware(process.env.OPENSHIFT_REPO_DIR + "coffee-monitor/" + 'public'));
-  app.use(express.static(path.join(process.env.OPENSHIFT_REPO_DIR + "coffee-monitor/", 'public')));
+  app.use(require('stylus').middleware(route_dir + 'public'));
+  app.use(express.static(path.join(route_dir, 'public')));
 });
 
 app.configure('development', function() {
