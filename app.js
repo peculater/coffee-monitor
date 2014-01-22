@@ -1,8 +1,5 @@
 
 var route_dir = "./"
-if (process.env.OPENSHIFT_NODEJS_IP) {
-   route_dir = "coffee-monitor/"   
-}
 
 var express = require('express'),
     routes = require(route_dir + 'routes'),
@@ -110,6 +107,7 @@ app.get('/brews/add/simple', ensureAuthenticatedOrKnownIp, routes.brewAddSimple)
 app.get('/brews/:id', onlineTracker, routes.brewDetail);
 app.delete('/brews/:id', userHelper.ensureAuthenticated, routes.brewDelete);
 app.get('/brews', onlineTracker, routes.brews);
+app.post('/brews/update', ensureAuthenticatedOrKnownIp, routes.brewUpdate);
 
 app.get('/tea', onlineTracker, routes.teapot);
 app.get('/qr', onlineTracker, routes.qr);

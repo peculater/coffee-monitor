@@ -181,6 +181,42 @@ exports.brewAddSubmit = function(req, res) {
   });
 };
 
+exports.brewUpdate = function(req, res) {
+  req.assert('brewInfo').notEmpty();
+  
+  var errors = req.validationErrors();
+  if(errors) {
+    res.set('Content-Type', 'text/plain');
+    res.send(400, 'Validation failed!\n' + require('util').inspect(errors));
+    return;
+  }
+
+  
+  //Validate JSON
+  
+  //Pull data out of JSON
+  
+  //Persist the current status
+  
+
+//If this represents a new pot  
+  var brew = {
+    makerId: maker,
+    potId: parseInt(potParts[0], 10),
+    creationIp: req.ip,
+  };
+    brew.readyAt = Date.now();
+  req.manager.addBrew(brew, function(err, brew) {
+    if (err) {
+      res.set('Content-Type', 'text/plain');
+      res.send(400, 'Error!\n' + err);
+      return;
+    }
+    //res.redirect('/brews/' + brew.id);
+    res.redirect('/');
+  });
+};
+
 exports.brews = fourohfour;
 
 
