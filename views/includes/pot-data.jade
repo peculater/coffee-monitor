@@ -1,6 +1,8 @@
 - var klass = 'pot-' + pot.color;
-.pot(id='pot-#{pot.id}', class=klass,
+- var meterklass = pot.color;
+.meter(id='pot-#{pot.id}', class=meterklass,
     data-currentLevel=pot.currentLevel, data-ready=pot.readyAt)
+  span{:width => #{pot.currentLevel * 100} + "%"};   
   ul
     li Pot: #{pot.name}
     - var ready = parseInt(pot.readyAt);
