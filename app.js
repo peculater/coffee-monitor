@@ -63,7 +63,7 @@ app.locals.moment = require('moment');
 app.configure(function() {
   app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000);
   app.set('ip', process.env.OPENSHIFT_NODEJS_IP || process.env.IP || '127.0.0.1');
-  app.set('views',  + 'views/');
+  app.set('views', openshift_app_dir  + 'views/');
   app.set('view engine', 'jade');
   app.set('trust proxy', true);
   app.use(express.favicon(openshift_app_dir + 'public/favicon.ico',
