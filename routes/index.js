@@ -184,20 +184,24 @@ exports.brewAddSubmit = function(req, res) {
 exports.brewUpdate = function(req, res) {
   console.log("Entering brewUpdate");
   
-  var errors = req.validationErrors();
-  if(errors) {
-    res.set('Content-Type', 'text/plain');
-    res.send(400, 'Validation failed!\n' + require('util').inspect(errors));
-    return;
-  }
+ 
 
   console.log("Got data: " + req.body);
+  console.log(require('util').inspect(req.body));
   console.log("Update is " + req.body.update);
   //Validate JSON
   var update = req.body.update;
   
   //Pull data out of JSON
   
+  //req.assert('update');
+ // var errors = req.validationErrors();
+  //if(errors) {
+  //  res.set('Content-Type', 'text/plain');
+  //  res.send(400, 'Validation failed!\nNo {update:[]} thing to parse' + require('util').inspect(errors));
+ //   return;
+  //}  
+
   update.forEach(function(item, index) {
     console.log("Processing item " + index);
     // `item` is the next item in the array
