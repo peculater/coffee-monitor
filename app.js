@@ -1,15 +1,20 @@
 
-var route_dir = "./"
+var openshift_app_dir = "./"
+if (process.env.OPENSHIFT_NODEJS_IP){
+    openshift_app_dir = process.env.OPENSHIFT_REPO_DIR + "coffee-monitor/";
+}
+
+
 
 var express = require('express'),
-    routes = require(route_dir + 'routes'),
+    routes = require(openshift_app_dir + 'routes'),
     http = require('http'),
     passport = require('passport'),
     path = require('path'),
-    brewHelper = require(route_dir + 'helpers/brews'),
-    redisHelper = require(route_dir + 'helpers/redis'),
-    signals = require(route_dir + 'helpers/signals'),
-    userHelper = require(route_dir + 'helpers/users');
+    brewHelper = require(openshift_app_dir + 'helpers/brews'),
+    redisHelper = require(openshift_app_dir + 'helpers/redis'),
+    signals = require(openshift_app_dir + 'helpers/signals'),
+    userHelper = require(openshift_app_dir + 'helpers/users');
 
 var db = redisHelper.getConnection();
 var manager = new brewHelper.BrewManager(db);
@@ -58,10 +63,10 @@ app.locals.moment = require('moment');
 app.configure(function() {
   app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000);
   app.set('ip', process.env.OPENSHIFT_NODEJS_IP || process.env.IP || '127.0.0.1');
-  app.set('views', route_dir + 'views/');
+  app.set('views',  + 'views/');
   app.set('view engine', 'jade');
   app.set('trust proxy', true);
-  app.use(express.favicon(route_dir + 'public/favicon.ico',
+  app.use(express.favicon(openshift_app_dir + 'public/favicon.ico',
           { maxAge: 365 * 24 * 60 * 60 * 1000 }));
   app.use(express.logger('dev'));
   app.use(express.compress({ filter: compressFilter }));
@@ -78,8 +83,8 @@ app.configure(function() {
   app.use(attachBrewManager);
   app.use(attachPassport);
   app.use(app.router);
-  app.use(require('stylus').middleware(route_dir + 'public'));
-  app.use(express.static(path.join(route_dir, 'public')));
+  app.use(require('stylus').middleware(openshift_app_dir + 'public'));
+  app.use(express.static(path.join(openshift_app_dir, 'public')));
 });
 
 app.configure('development', function() {
