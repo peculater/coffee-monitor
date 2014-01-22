@@ -182,7 +182,7 @@ exports.brewAddSubmit = function(req, res) {
 };
 
 exports.brewUpdate = function(req, res) {
-  //req.assert('brewInfo').notEmpty();
+  console.log("Entering brewUpdate");
   
   var errors = req.validationErrors();
   if(errors) {
@@ -191,15 +191,21 @@ exports.brewUpdate = function(req, res) {
     return;
   }
 
-  res.set('Content-Type', 'text/plain');
-  res.send(200, req.data);
+  console.log("Got data: " + req.data);
+  
   //Validate JSON
-  //var update = JSON.parse(req.data);
-  
-  
+  var update = req.data;
   
   //Pull data out of JSON
   
+  update.forEach(function(item, index) {
+    console.log("Processing item " + index);
+    // `item` is the next item in the array
+    // `index` is the numeric position in the array, e.g. `array[index] == item`
+    console.log("Item has pot" + item.pot);
+  });
+ 
+ 
   //Persist the current status
   
 
