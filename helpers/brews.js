@@ -102,7 +102,26 @@ BrewManager.prototype.deletePot = function(id, next) {
 };
 
 BrewManager.prototype.updatePot = function(update, next){
-
+  var self = this;
+  async.waterfall([
+      function(next) {
+        self.db.multi()
+          .hmset('pot:' + update.pot, 
+              'currentLevel', update.currentLevel,
+              'removed', update.removed
+           )
+          .exec(next);
+          if (update.lastBrew != 0 && update.lastBrew != "0" && update.lastBrew != undefined){
+            self.db.multi()
+              .hmset('pot:' + update.pot, 
+                'lastBrew', update.lastBrew
+              )
+            .exec(next);
+          }
+      }
+ ], function(err, results) {
+    next(err, brew);
+  });
 }
 
 BrewManager.prototype.getBrew = function(id, next) {

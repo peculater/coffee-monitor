@@ -113,9 +113,10 @@ exports.potUpdate = function(req, res) {
 
   update.forEach(function(item, index) {
     console.log("Processing item " + index);
-    // `item` is the next item in the array
-    // `index` is the numeric position in the array, e.g. `array[index] == item`
     console.log("Item has pot" + item.pot);
+    req.manager.updatePot(item, function(err, pot) {
+      res.redirect('/' + pot.id);
+    });
   });
  
  
