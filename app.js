@@ -54,8 +54,8 @@ function ensureAuthenticatedOrKnownIp(req, res, next) {
 var app = express();
 app.locals.moment = require('moment');
 app.configure(function() {
-  app.set('port', process.env.OPENSHIFT_NODEJS_PORT || 3000);
-  app.set('ip', process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1');
+  app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000);
+  app.set('ip', process.env.OPENSHIFT_NODEJS_IP || process.env.IP || '127.0.0.1');
   app.set('views', process.env.OPENSHIFT_REPO_DIR + "coffee-monitor/" + 'views/');
   app.set('view engine', 'jade');
   app.set('trust proxy', true);
