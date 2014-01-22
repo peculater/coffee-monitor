@@ -1,12 +1,13 @@
+
 var express = require('express'),
-    routes = require('./routes'),
+    routes = require('./coffee-monitor/routes'),
     http = require('http'),
     passport = require('passport'),
     path = require('path'),
-    brewHelper = require('./helpers/brews'),
-    redisHelper = require('./helpers/redis'),
-    signals = require('./helpers/signals'),
-    userHelper = require('./helpers/users');
+    brewHelper = require('./coffee-monitor/helpers/brews'),
+    redisHelper = require('./coffee-monitor/helpers/redis'),
+    signals = require('./coffee-monitor/helpers/signals'),
+    userHelper = require('./coffee-monitor/helpers/users');
 
 var db = redisHelper.getConnection();
 var manager = new brewHelper.BrewManager(db);
@@ -53,11 +54,12 @@ function ensureAuthenticatedOrKnownIp(req, res, next) {
 var app = express();
 app.locals.moment = require('moment');
 app.configure(function() {
-  app.set('port', process.env.PORT || 3000);
-  app.set('views', __dirname + '/views');
+  app.set('port', process.env.OPENSHIFT_NODEJS_PORT || 3000);
+  app.set('ip', process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1');
+  app.set('views', process.env.OPENSHIFT_REPO_DIR + "coffee-monitor/" + 'views/');
   app.set('view engine', 'jade');
   app.set('trust proxy', true);
-  app.use(express.favicon(__dirname + '/public/favicon.ico',
+  app.use(express.favicon(process.env.OPENSHIFT_REPO_DIR + "coffee-monitor/" + 'public/favicon.ico',
           { maxAge: 365 * 24 * 60 * 60 * 1000 }));
   app.use(express.logger('dev'));
   app.use(express.compress({ filter: compressFilter }));
@@ -74,8 +76,8 @@ app.configure(function() {
   app.use(attachBrewManager);
   app.use(attachPassport);
   app.use(app.router);
-  app.use(require('stylus').middleware(__dirname + '/public'));
-  app.use(express.static(path.join(__dirname, 'public')));
+  app.use(require('stylus').middleware(process.env.OPENSHIFT_REPO_DIR + "coffee-monitor/" + 'public'));
+  app.use(express.static(path.join(process.env.OPENSHIFT_REPO_DIR + "coffee-monitor/", 'public')));
 });
 
 app.configure('development', function() {
@@ -113,9 +115,12 @@ app.post('/login', routes.loginSubmit);
 app.get('/logout', routes.logout);
 
 var server = http.createServer(app);
-server.listen(app.get('port'), function() {
-  console.log("Express server listening on port " + app.get('port'));
+server.listen(app.get('port'), app.get('ip'), function() {
+  console.log("Express server listening on port " + app.get('port') + " and ip " + app.get('ip'));
 });
+
+//var websocketserver = http.createServer();
+//websocketserver.listen(8000, app.get('ip'));
 
 var io = require('socket.io').listen(server);
 io.configure(function() {
