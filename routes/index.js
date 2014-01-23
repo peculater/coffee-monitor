@@ -117,10 +117,11 @@ exports.potUpdate = function(req, res) {
     console.log("Processing item " + index);
     console.log("Item has pot" + item.pot);
     req.manager.updatePot(item, function(err, pot) {
-      res.redirect('/' + pot.id);
-    });
+      });
   });
  
+
+  res.redirect('/');
  
   //Persist the current status
   
