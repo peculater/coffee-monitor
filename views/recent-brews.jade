@@ -17,6 +17,7 @@ block script
   script(src='/javascripts/progressbar.js')
   script(src='/socket.io/socket.io.js')
   script
+    console.log("Page start");
     function calculateOpacity(time) {
       // returns diff in milliseconds
       var diff = moment().diff(moment(time));
