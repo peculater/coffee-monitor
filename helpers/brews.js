@@ -81,6 +81,10 @@ BrewManager.prototype.getPots = function(next) {
   });
 };
 
+BrewManager.prototype.getPot = function(id, next) {
+  this.db.hgetall('pot:' + id, next);
+};
+
 BrewManager.prototype.addPot = function(pot, next) {
   var self = this;
   async.waterfall([
