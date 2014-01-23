@@ -74,6 +74,18 @@ block script
         ele.fadeTo(1500, calculateOpacity(created));
       }
     });
+    socket.on('updatePot', function(data) {
+      var parsed = $.parseJSON(data);
+      var id = $(parsed).attr('id');
+      var found = $('#pot' + id + " span");
+      if(found.length) {      
+        found.data("origWidth", $(this).width()).animate({
+			width: data.currentLevel * 100 + "%"
+		}, 1200);
+	});
+      }
+    });
+
     socket.on('deleteBrew', function(data) {
       var brew = $('#brew-' + data);
       brew.fadeOut(1000, function() { brew.remove() });

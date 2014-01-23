@@ -39,12 +39,7 @@ exports.updatePot = function(app, io, manager, potId) {
   manager.getPot(potId, function(error, pot) {
     async.parallel([
       function(next) {
-        app.render('includes/pot-data', {pot: pot}, function(err, html) {
-          if (err) {
-            next(err);
-            return;
-          }
-          io.sockets.emit('updatePot', html);
+          io.sockets.emit('updatePot', pot);
           next(null);
         })
       }
