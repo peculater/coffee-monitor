@@ -75,16 +75,20 @@ block script
       }
     });
     socket.on('updatePot', function(data) {
+      console.log("In updatepot");
+      console.log("Data is " + data);
       var parsed = $.parseJSON(data);
+      console.log("Parsed is " + parsed);
       var id = $(parsed).attr('id');
       var found = $('#pot-' + id + " span");
       if(found.length) {      
+        console.log("found the thing, resizing...");
         found.data("origWidth", $(this).width()).animate({
                     width: data.currentLevel * 100 + "%"
                   }, 1200);
-        }else{
-          console.log("could not find span");
-        }
+      }else{
+        console.log("could not find span");
+      }
     });
 
     socket.on('deleteBrew', function(data) {
