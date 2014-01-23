@@ -41,8 +41,7 @@ exports.updatePot = function(app, io, manager, potId) {
       function(next) {
           io.sockets.emit('updatePot', pot);
           next(null);
-        })
-      }
+        }
     ]);
   });
 };
