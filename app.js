@@ -161,6 +161,8 @@ ioSub.on('message', function(chan, msg) {
     signals.updateBrew(app, io, manager, msg);
   } else if (chan === 'deleteBrew') {
     signals.deleteBrew(io, msg);
+  } else if (chan === 'updatePot') {
+    signals.updatePot(app, io, manager, msg);
   }
 });
-ioSub.subscribe('updateBrew', 'deleteBrew');
+ioSub.subscribe('updateBrew', 'deleteBrew', 'updatePot');
