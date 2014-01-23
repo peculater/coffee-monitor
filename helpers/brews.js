@@ -125,7 +125,7 @@ BrewManager.prototype.updatePot = function(update, next){
           }
       }
  ], function(err, results) {
-    next(err, brew);
+    next(err, pot);
   });
 }
 
