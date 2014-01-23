@@ -3,10 +3,6 @@
 .meter.animate(id='pot-#{pot.id}', class=meterklass,
     data-currentLevel=pot.currentLevel, data-ready=pot.readyAt)
   span(style="width: #{pot.currentLevel * 100}%")   
-  ul
-    li Pot: #{pot.name}
-    - var ready = parseInt(pot.readyAt);
-    li Fraction full: #{pot.currentLevel} 
-    li Ready: #{moment(ready).calendar()} (
+  div Ready: #{moment(ready).calendar()} (
       span.ready-relative #{moment(ready).fromNow()}
       | )
