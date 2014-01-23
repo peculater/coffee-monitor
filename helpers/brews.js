@@ -120,19 +120,15 @@ BrewManager.prototype.updatePot = function(update, next){
           .exec(next);
         },
         function(potresult, next) {
-          console.log("Testing for updated brew");
-          console.log(require('util').inspect(potresult));
           var pot = potresult[1];
           //Vaguely valid data
           if (update.lastBrew != 0 && update.lastBrew != "0" && update.lastBrew != undefined){
-            console.log("Brewdata exists");
-            console.log("comparing " + int10(update.lastBrew) * 1000 + " > " + pot.readyAt );
             if (int10(update.lastBrew) * 1000 > pot.readyAt){
-              console.log ("Need a new brew");
+              console.log ("lastBrew was updated");
               var brew = {
                 creationIp: '127.0.0.1',
                 readyAt: int10(update.lastBrew) * 1000,
-                makerId: 0,
+                makerId: 1,
                 potId: update.pot,
               };
               self.addBrew(brew, next);
@@ -182,7 +178,7 @@ BrewManager.prototype.addBrew = function(brew, next) {
           if (!brew.readyAt) {
             brew.createdAt = now;
           } else {
-            brew.createdAt = brew.readyAt - (1000 * int10(brew.brewTime));
+            brew.createdAt = int10(brew.readyAt) - (1000 * int10(brew.brewTime));
           }
         }
         if (!brew.readyAt) {
