@@ -102,45 +102,13 @@ exports.potUpdate = function(req, res) {
   console.log("Update is " + req.body.update);
   //Validate JSON
   var update = req.body.update;
-  
-  //Pull data out of JSON
-  
-  //req.assert('update');
- // var errors = req.validationErrors();
-  //if(errors) {
-  //  res.set('Content-Type', 'text/plain');
-  //  res.send(400, 'Validation failed!\nNo {update:[]} thing to parse' + require('util').inspect(errors));
- //   return;
-  //}  
 
   update.forEach(function(item, index) {
     console.log("Processing item " + index);
     console.log("Item has pot" + item.pot);
     req.manager.updatePot(item, function(err, pot) {
       });
-  };
- 
-
-  //Persist the current status
-  
-
-//If this represents a new pot  
-  /*var brew = {
-    makerId: maker,
-    potId: parseInt(potParts[0], 10),
-    creationIp: req.ip,
-  };
-    brew.readyAt = Date.now();
-  req.manager.addBrew(brew, function(err, brew) {
-    if (err) {
-      res.set('Content-Type', 'text/plain');
-      res.send(400, 'Error!\n' + err);
-      return;
-    }
-    //res.redirect('/brews/' + brew.id);
-    res.redirect('/');
   });
-  */
 };
 
 exports.potDelete = function(req, res) {
