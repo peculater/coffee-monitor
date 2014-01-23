@@ -115,10 +115,14 @@ BrewManager.prototype.updatePot = function(update, next){
               'currentLevel', update.currentLevel,
               'removed', update.removed
            )
+          .hgetall('pot:' + update.pot)
           .publish('updatePot', update.pot)
           .exec(next);
+        },
+        function(pot, next) {
+          //Vaguely valid data
           if (update.lastBrew != 0 && update.lastBrew != "0" && update.lastBrew != undefined){
-            var pot =  self.db.hgetall('pot:' + update.pot, null);
+            //updated brew
             if (int10(update.lastBrew) * 1000 > pot.readyAt){
               var brew = {
                 creationIp: '127.0.0.1',
@@ -152,8 +156,7 @@ BrewManager.prototype.addBrew = function(brew, next) {
           .hmget('maker:' + brew.makerId, 'name', 'brewTime', 'readyAt')
           .hmget('pot:' + brew.potId, 'name', 'color', 'readyAt')
           .exec(next);
-      },
-      function(results, next) {
+  
         // check preconditions first: we must be > readyAt time for this brew
         // to even make sense, otherwise someone is spoofing us
         var now = Date.now();
