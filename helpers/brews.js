@@ -119,8 +119,9 @@ BrewManager.prototype.updatePot = function(update, next){
           .publish('updatePot', update.pot)
           .exec(next);
         },
-        function(pot, next) {
+        function(potresult, next) {
           console.log("Testing for updated brew");
+          var pot = potresult[0];
           //Vaguely valid data
           if (update.lastBrew != 0 && update.lastBrew != "0" && update.lastBrew != undefined){
             console.log("Brewdata exists");
@@ -158,7 +159,8 @@ BrewManager.prototype.addBrew = function(brew, next) {
           .hmget('maker:' + brew.makerId, 'name', 'brewTime', 'readyAt')
           .hmget('pot:' + brew.potId, 'name', 'color', 'readyAt')
           .exec(next);
-  
+      },
+      function(results, next) { 
         // check preconditions first: we must be > readyAt time for this brew
         // to even make sense, otherwise someone is spoofing us
         var now = Date.now();
