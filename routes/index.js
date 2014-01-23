@@ -109,6 +109,9 @@ exports.potUpdate = function(req, res) {
     req.manager.updatePot(item, function(err, pot) {
       });
   });
+  
+  res.redirect('/');
+
 };
 
 exports.potDelete = function(req, res) {
