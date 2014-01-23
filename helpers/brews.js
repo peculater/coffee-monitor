@@ -120,11 +120,11 @@ BrewManager.prototype.updatePot = function(update, next){
           .exec(next);
         },
         function(pot, next) {
-          console.log ("Testing for updated brew");
+          console.log("Testing for updated brew");
           //Vaguely valid data
           if (update.lastBrew != 0 && update.lastBrew != "0" && update.lastBrew != undefined){
-            console.log ("Brewdata exists");
-            console.log ("comparing " + int10(update.lastBrew) * 1000 + " > " pot.readyAt );
+            console.log("Brewdata exists");
+            console.log("comparing " + int10(update.lastBrew) * 1000 + " > " + pot.readyAt );
             if (int10(update.lastBrew) * 1000 > pot.readyAt){
               console.log ("Need a new brew");
               var brew = {
