@@ -33,6 +33,25 @@ exports.updateBrew = function(app, io, manager, brewId) {
   });
 };
 
+
+exports.updatePot = function(app, io, manager, potId) {
+//Just copying from above
+  manager.getPot(potId, function(error, pot) {
+    async.parallel([
+      function(next) {
+        app.render('includes/pot-data', {pot: pot}, function(err, html) {
+          if (err) {
+            next(err);
+            return;
+          }
+          io.sockets.emit('updatePot', html);
+          next(null);
+        })
+      }
+    ]);
+  });
+};
+
 exports.deleteBrew = function(io, brewId) {
   io.sockets.emit('deleteBrew', brewId);
 };
