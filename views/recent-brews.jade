@@ -81,12 +81,11 @@ block script
       //already magically deserialized
       var parsed = data;
       var id = $(parsed).attr('id');
-      var found = $('#pot-' + id + " span");
+      var found = $('#pot-' + id + " > span");
+      var newWidth = parsed.currentLevel * 100 + "%"
       if(found.length) {      
         console.log("found the thing, resizing...");
-        found.data("origWidth", $(this).width()).animate({
-                    width: data.currentLevel * 100 + "%"
-                  }, 1200);
+        found.animate({ width: newWidth }, 1200);
       }else{
         console.log("could not find span");
       }
