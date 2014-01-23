@@ -3,6 +3,7 @@
 .meter.animate(id='pot-#{pot.id}', class=meterklass,
     data-currentLevel=pot.currentLevel, data-ready=pot.readyAt)
   span(style="width: #{pot.currentLevel * 100}%")   
-  span() Ready: #{moment(ready).calendar()} (
+  span
+    | Ready: #{moment(ready).calendar()} (
       span.ready-relative #{moment(ready).fromNow()}
       | )
