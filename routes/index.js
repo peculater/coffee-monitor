@@ -121,8 +121,6 @@ exports.potUpdate = function(req, res) {
   });
  
 
-  res.redirect('/');
- 
   //Persist the current status
   
 
