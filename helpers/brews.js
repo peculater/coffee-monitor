@@ -115,6 +115,7 @@ BrewManager.prototype.updatePot = function(update, next){
               'currentLevel', update.currentLevel,
               'removed', update.removed
            )
+          .publish('updatePot', update.pot)
           .exec(next);
           if (update.lastBrew != 0 && update.lastBrew != "0" && update.lastBrew != undefined){
             self.db.multi()
