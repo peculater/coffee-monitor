@@ -118,11 +118,17 @@ BrewManager.prototype.updatePot = function(update, next){
           .publish('updatePot', update.pot)
           .exec(next);
           if (update.lastBrew != 0 && update.lastBrew != "0" && update.lastBrew != undefined){
-            self.db.multi()
-              .hmset('pot:' + update.pot, 
-                'lastBrew', update.lastBrew
-              )
-              .exec(next);
+            var pot =  this.db.hgetall('pot:' + update.pot, null);
+            if (int10(update.lastBrew) * 1000 > pot.readyAt){
+              var brew = {
+                creationIp: '127.0.0.1',
+                readyAt: int10(update.lastBrew) * 1000,
+                makerId: 0,
+                potId: update.pot,
+                
+              };
+              self.addBrew(brew, next);
+            }
           }
       }
  ], function(err, results) {
