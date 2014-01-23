@@ -86,14 +86,12 @@ block script
       }else{
         console.log("could not find span");
       }
-      var containfound = $('#pot-' + id + " > span");
-      if (containfound.length) {
-        if (parsed.removed == "true"){
-          containfound.addClass("faded");
-        }else{
-          containfound.removeClass("faded");
-        }
+      if (parsed.removed == "true"){
+        found.parent().addClass("faded");
+      }else{
+        found.parent().removeClass("faded");
       }
+     
     });
 
     socket.on('deleteBrew', function(data) {
