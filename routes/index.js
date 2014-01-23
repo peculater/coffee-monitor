@@ -118,7 +118,7 @@ exports.potUpdate = function(req, res) {
     console.log("Item has pot" + item.pot);
     req.manager.updatePot(item, function(err, pot) {
       });
-  });
+  };
  
 
   //Persist the current status
