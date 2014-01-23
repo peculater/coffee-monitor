@@ -53,7 +53,7 @@ block script
       });
     }
 
-    var socket = io.connect();
+    var socket = io.connect('ws://coffeemonitor-backstopcoffee.rhcloud.com:8000/');
     socket.on('recentBrews', function(data) {
       $('#brews').html(data);
       refreshBrews();
