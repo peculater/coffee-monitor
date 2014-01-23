@@ -78,8 +78,8 @@ block script
     socket.on('updatePot', function(data) {
       console.log("In updatepot");
       console.log("Data is " + data);
-      var parsed = $.parseJSON(data);
-      console.log("Parsed is " + parsed);
+      //already magically deserialized
+      var parsed = data;
       var id = $(parsed).attr('id');
       var found = $('#pot-' + id + " span");
       if(found.length) {      
