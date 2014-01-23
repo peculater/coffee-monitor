@@ -110,7 +110,7 @@ exports.potUpdate = function(req, res) {
       });
   });
   
-  res.redirect('/');
+  res.send(204, null);
 
 };
 
