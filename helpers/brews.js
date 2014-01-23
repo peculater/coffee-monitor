@@ -120,16 +120,18 @@ BrewManager.prototype.updatePot = function(update, next){
           .exec(next);
         },
         function(pot, next) {
+          console.log ("Testing for updated brew");
           //Vaguely valid data
           if (update.lastBrew != 0 && update.lastBrew != "0" && update.lastBrew != undefined){
-            //updated brew
+            console.log ("Brewdata exists");
+            console.log ("comparing " + int10(update.lastBrew) * 1000 + " > " pot.readyAt );
             if (int10(update.lastBrew) * 1000 > pot.readyAt){
+              console.log ("Need a new brew");
               var brew = {
                 creationIp: '127.0.0.1',
                 readyAt: int10(update.lastBrew) * 1000,
                 makerId: 0,
                 potId: update.pot,
-                
               };
               self.addBrew(brew, next);
             }
