@@ -82,8 +82,7 @@ block script
         found.data("origWidth", $(this).width()).animate({
                     width: data.currentLevel * 100 + "%"
                   }, 1200);
-        });
-      }
+        }
     });
 
     socket.on('deleteBrew', function(data) {
