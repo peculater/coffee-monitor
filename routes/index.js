@@ -96,16 +96,11 @@ exports.potAddSubmit = function(req, res) {
 
 
 exports.potUpdate = function(req, res) {
-  console.log("Entering brewUpdate");
-  console.log("Got data: " + req.body);
   console.log(require('util').inspect(req.body));
-  console.log("Update is " + req.body.update);
   //Validate JSON
   var update = req.body.update;
 
   update.forEach(function(item, index) {
-    console.log("Processing item " + index);
-    console.log("Item has pot" + item.pot);
     req.manager.updatePot(item, function(err, pot) {
       });
   });
