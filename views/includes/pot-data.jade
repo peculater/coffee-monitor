@@ -1,5 +1,6 @@
 - var klass = 'pot-' + pot.color;
 - var meterklass = pot.color;
+- if (pot.removed) meterklass += ' faded';
 .meter.animate(id='pot-#{pot.id}', class=meterklass,
     data-currentLevel=pot.currentLevel, data-ready=pot.readyAt)
   span(style="width: #{pot.currentLevel * 100}%") 
