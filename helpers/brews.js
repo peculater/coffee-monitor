@@ -118,7 +118,7 @@ BrewManager.prototype.updatePot = function(update, next){
           .publish('updatePot', update.pot)
           .exec(next);
           if (update.lastBrew != 0 && update.lastBrew != "0" && update.lastBrew != undefined){
-            var pot =  this.db.hgetall('pot:' + update.pot, null);
+            var pot =  self.db.hgetall('pot:' + update.pot, null);
             if (int10(update.lastBrew) * 1000 > pot.readyAt){
               var brew = {
                 creationIp: '127.0.0.1',
