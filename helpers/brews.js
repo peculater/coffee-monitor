@@ -122,7 +122,7 @@ BrewManager.prototype.updatePot = function(update, next){
         function(potresult, next) {
           console.log("Testing for updated brew");
           console.log(require('util').inspect(potresult));
-          var pot = potresult[0];
+          var pot = potresult[1];
           //Vaguely valid data
           if (update.lastBrew != 0 && update.lastBrew != "0" && update.lastBrew != undefined){
             console.log("Brewdata exists");
