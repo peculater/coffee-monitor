@@ -58,8 +58,5 @@
     "jshint": "*"
   },
   "private": true,
-  "scripts": { 
-    "start": "node server.js --websocket-port=8000 --log-level=1" 
-  },
   "main": "server.js"
 }
