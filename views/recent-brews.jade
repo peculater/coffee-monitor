@@ -77,11 +77,13 @@ block script
     socket.on('updatePot', function(data) {
       var parsed = $.parseJSON(data);
       var id = $(parsed).attr('id');
-      var found = $('#pot' + id + " span");
+      var found = $('#pot-' + id + " span");
       if(found.length) {      
         found.data("origWidth", $(this).width()).animate({
                     width: data.currentLevel * 100 + "%"
                   }, 1200);
+        }else{
+          console.log("could not find span");
         }
     });
 
