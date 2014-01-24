@@ -30,7 +30,7 @@ are as follows:
 * Coffee pots
   - name: 'pot:%id%'
   - type: hash
-  - attributes: id, name, color
+  - attributes: id, name, color, lastBrew, readyAt, currentLevel, removed
 * Brews set
   - name: 'brews'
   - type: sorted set by time of brew
