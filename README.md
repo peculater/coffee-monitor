@@ -72,6 +72,12 @@ about. This is the same as the contents of the '#brews' div.
 This event is sent automatically when a client connects to make sure they have
 the most recent list of brews.
 
+#### updatePot
+
+This is broadcast to all currently connected clients.  It sends the JSON object
+representing all of the pots currently in the system, including how full they
+are, whether they are in the caddy, etc.
+
 ### Emitted by client
 
 #### recentBrews
