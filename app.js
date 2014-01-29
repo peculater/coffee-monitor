@@ -68,7 +68,7 @@ app.configure(function() {
   app.set('trust proxy', true);
   app.use(express.favicon(openshift_app_dir + 'public/favicon.ico',
           { maxAge: 365 * 24 * 60 * 60 * 1000 }));
-  app.use(express.logger('dev'));
+//  app.use(express.logger('dev'));
   app.use(express.compress({ filter: compressFilter }));
   app.use(express.bodyParser());
   app.use(require('express-validator'));
