@@ -8,9 +8,6 @@
     li Pot: #{brew.potName}
     - var created = parseInt(brew.createdAt);
     - var ready = parseInt(brew.readyAt);
-    li Started: #{moment(created).calendar()} (
-      span.created-relative #{moment(created).fromNow()}
-      | )
     li Ready: #{moment(ready).calendar()} (
       span.ready-relative #{moment(ready).fromNow()}
       | )

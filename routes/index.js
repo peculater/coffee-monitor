@@ -96,7 +96,7 @@ exports.potAddSubmit = function(req, res) {
 
 
 exports.potUpdate = function(req, res) {
-  console.log(require('util').inspect(req.body));
+  //console.log(require('util').inspect(req.body));
   //Validate JSON
   var update = req.body.update;
 
