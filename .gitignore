@@ -2,3 +2,4 @@
 /public/stylesheets/*.css
 .DS_Store
 tags
+npm-debug.log
